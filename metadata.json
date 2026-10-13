@@ -1,0 +1,6 @@
+{
+  "name": "Mahila Shield AI",
+  "description": "Transit safety and travel awareness system featuring preventive route comparison, real-time deviation monitoring, and automated emergency response protocols.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

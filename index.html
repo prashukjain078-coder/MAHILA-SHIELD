@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script>
+      (function() {
+        var origConsoleError = console.error;
+        console.error = function() {
+          var str = Array.prototype.slice.call(arguments).map(String).join(' ');
+          if (
+            str.indexOf('DEMO_MAP_ID') !== -1 ||
+            str.indexOf('Unable to fetch configuration for mapId') !== -1 ||
+            str.indexOf('without a valid Map ID') !== -1 ||
+            str.indexOf('prevent use of Advanced Markers') !== -1 ||
+            str.indexOf('OverQuotaMapError') !== -1 ||
+            str.indexOf('QuotaExceededError') !== -1 ||
+            str.indexOf('ApiProjectMapError') !== -1 ||
+            str.indexOf('ExpiredKeyMapError') !== -1 ||
+            str.indexOf('RefererNotAllowedMapError') !== -1 ||
+            str.indexOf('Google Maps JavaScript API error') !== -1 ||
+            str.indexOf('Script error') !== -1
+          ) {
+            try {
+              window.dispatchEvent(new CustomEvent('gmp-quota-exceeded'));
+            } catch (_) {}
+            return;
+          }
+          origConsoleError.apply(console, arguments);
+        };
+
+        function isSuppressed(msg, src) {
+          var m = String(msg || '');
+          var s = String(src || '');
+          return (
+            m.indexOf('Script error') !== -1 ||
+            m.indexOf('ResizeObserver') !== -1 ||
+            m.indexOf('DEMO_MAP_ID') !== -1 ||
+            m.indexOf('Map ID') !== -1 ||
+            !s ||
+            s.indexOf('maps.googleapis.com') !== -1 ||
+            s.indexOf('gstatic.com') !== -1 ||
+            s.indexOf('google.com') !== -1
+          );
+        }
+        window.addEventListener(
+          'error',
+          function(e) {
+            if (isSuppressed(e.message, e.filename)) {
+              if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+              if (e.preventDefault) e.preventDefault();
+              try {
+                window.dispatchEvent(new CustomEvent('gmp-quota-exceeded'));
+              } catch (_) {}
+              return true;
+            }
+          },
+          true
+        );
+        window.onerror = function(msg, url) {
+          if (isSuppressed(msg, url)) {
+            try {
+              window.dispatchEvent(new CustomEvent('gmp-quota-exceeded'));
+            } catch (_) {}
+            return true;
+          }
+          return false;
+        };
+        window.addEventListener(
+          'unhandledrejection',
+          function(e) {
+            var reason = String((e && e.reason && (e.reason.message || e.reason)) || '');
+            if (
+              reason.indexOf('Script error') !== -1 ||
+              reason.indexOf('maps.googleapis.com') !== -1 ||
+              reason.indexOf('Quota') !== -1 ||
+              reason.indexOf('ApiNotActivated') !== -1 ||
+              reason.indexOf('RefererNotAllowed') !== -1
+            ) {
+              if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+              if (e.preventDefault) e.preventDefault();
+              try {
+                window.dispatchEvent(new CustomEvent('gmp-quota-exceeded'));
+              } catch (_) {}
+            }
+          },
+          true
+        );
+      })();
+    </script>
+    <title>Mahila Shield AI - Travel Safety & Journey Awareness</title>
+    <meta name="description" content="Transit safety and travel awareness system featuring preventive route comparison, real-time deviation monitoring, and automated emergency response protocols." />
+    <meta property="og:title" content="Mahila Shield AI - Travel Safety & Journey Awareness" />
+    <meta property="og:description" content="Transit safety and travel awareness system featuring preventive route comparison, real-time deviation monitoring, and automated emergency response protocols." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-slate-100 text-slate-900 antialiased selection:bg-blue-600 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
