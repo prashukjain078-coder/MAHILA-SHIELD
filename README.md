@@ -39,7 +39,9 @@ React 19, TypeScript, Vite, Tailwind CSS, Google Maps Platform (maps, traffic, h
 - Route safety scores use district crime baselines based on NCRB figures. The police station, hospital and footfall points are a hand-curated sample for Indore and Bhopal, not a complete dataset.
 - Guardian alerts are simulated in this build. A production version needs an SMS or WhatsApp backend, which is the next thing we would add.
 - Gwalior, Jabalpur and Ujjain have crime baselines in place and are waiting on route and infrastructure data.
-
+  
+## Live link 
+https://mahila-shield-5q8c-cdhstgiy6-pj-0703.vercel.app/
 ## Author
 
 Prashuk Jain
