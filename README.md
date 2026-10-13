@@ -2,8 +2,6 @@
 
 A travel safety app for women commuting in Madhya Pradesh. Pick a route, travel it, and if your ride starts going somewhere it shouldn't, the app notices before you have to.
 
-Built for AI मंथन 2.0 at Acropolis Institute, Indore.
-
 ## The problem
 
 Maps apps give you the fastest route. They don't tell you the fastest route cuts through an unlit stretch with no help nearby. And once you're in a cab or auto, nothing is watching if the driver takes a turn you didn't expect.
@@ -41,7 +39,7 @@ React 19, TypeScript, Vite, Tailwind CSS, Google Maps Platform (maps, traffic, h
 - Gwalior, Jabalpur and Ujjain have crime baselines in place and are waiting on route and infrastructure data.
   
 ## Live link 
-https://mahila-shield-5q8c-cdhstgiy6-pj-0703.vercel.app/
+https://mahila-shield.vercel.app
 ## Author
 
 Prashuk Jain
